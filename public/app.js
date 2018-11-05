@@ -73,10 +73,12 @@ $.getJSON("/articles", function(data) {
     $("#bodyinput").val("");
   });
 
+  // When you click the deleteNotes button
   $(document).on("click", "#deleteNotes", function(){
+  // Grab the id associated with the article
 
     var thisId = $(this).attr("data-id");
-
+    // Run a GET request to remove the values 
     $.ajax({
         method:"GET",
         url: "/articles/" + thisId,
@@ -91,13 +93,14 @@ $.getJSON("/articles", function(data) {
 
         if (data.note) {
             $("#titleinput").empty();
-            // empty the text areas
+            
             $("#bodyinput").empty();
           }
 
         // $("#notes").empty();
     });
 
+    //empty the input fields as well
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });
