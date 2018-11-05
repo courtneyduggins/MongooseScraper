@@ -31,6 +31,8 @@ $.getJSON("/articles", function(data) {
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+        //A button to delete all the notes associated with the specific article
+        $("#notes").append("<button data-id='" + data.id + "' id='deleteNotes'>Delete Notes</button>");
   
         // If there's a note in the article
         if (data.note) {
@@ -67,6 +69,35 @@ $.getJSON("/articles", function(data) {
       });
   
     // Also, remove the values entered in the input and textarea for note entry
+    $("#titleinput").val("");
+    $("#bodyinput").val("");
+  });
+
+  $(document).on("click", "#deleteNotes", function(){
+
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method:"GET",
+        url: "/articles/" + thisId,
+        data: {
+            title: $("#titleinput").val(),
+            body: $("bodyinput").val()
+        }
+    })
+
+    .then(function(data){
+        console.log(data);
+
+        if (data.note) {
+            $("#titleinput").empty();
+            // empty the text areas
+            $("#bodyinput").empty();
+          }
+
+        // $("#notes").empty();
+    });
+
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });

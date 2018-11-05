@@ -18,11 +18,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_g7ccp609:Ec3i3nWEDVbAtLt@ds151393.mlab.com:51393/heroku_g7ccp609";
-mongoose.connect(MONGODB_URI);
+// var dB = mongoose.createConnection("mongodb://heroku_g7ccp609:Ec3i3nWEDVbAtLt@ds151393.mlab.com:51393/heroku_g7ccp609");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://paris2020:U9LMkh2MNaMYdTw@ds151393.mlab.com:51393/heroku_g7ccp609";
+mongoose.connect(MONGODB_URI,  {useNewUrlParser: true } );
 
 // Routes
-
+//pw U9LMkh2MNaMYdTw
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
